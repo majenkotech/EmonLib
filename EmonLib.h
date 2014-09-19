@@ -19,6 +19,8 @@
 
 #endif
 
+#include <ADS1115.h>
+
 // to enable 12-bit ADC resolution on Arduino Due, 
 // include the following line in main sketch inside setup() function:
 //  analogReadResolution(ADC_BITS);
@@ -46,6 +48,8 @@ class EnergyMonitor
     double calcIrms(int NUMBER_OF_SAMPLES);
     void serialprint();
 
+    int analogRead(int c);
+
     long readVcc();
     //Useful value variables
     double realPower,
@@ -54,7 +58,12 @@ class EnergyMonitor
        Vrms,
        Irms;
 
+    EnergyMonitor(ADS1115 *adc) : _adc(adc) {}
+    EnergyMonitor(ADS1115 &adc) : _adc(&adc) {}
+
   private:
+
+    ADS1115 *_adc;
 
     //Set Voltage and current input pins
     int inPinV;

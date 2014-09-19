@@ -257,3 +257,17 @@ long EnergyMonitor::readVcc() {
  #endif
 }
 
+int EnergyMonitor::analogRead(int c) {
+    switch(c) {
+        case 0:
+            return _adc->getConversionP0GND();
+        case 1:
+            return _adc->getConversionP1GND();
+        case 2:
+            return _adc->getConversionP2GND();
+        case 3:
+            return _adc->getConversionP3GND();
+    }
+    return 0;
+}
+
